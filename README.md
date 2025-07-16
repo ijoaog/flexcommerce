@@ -179,4 +179,4 @@ TODO: Adicionar migration quando ao banco de dados, componentização no front, 
 
 ---
 
-# ⚠️Projeto em contrução e em constante evolução!⚠️
+# ⚠️Projeto em construção e em constante evolução!⚠️
