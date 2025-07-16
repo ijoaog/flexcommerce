@@ -34,13 +34,13 @@ docker-compose up --build
 Esse comando irá iniciar:
 
 - Frontend (Next.js) na porta `3000`
-- Backend (NestJS) na porta `3001`
+- Backend (NestJS) na porta `3003`
 - MySQL na porta `3306`
 
 ### 3. Acessar a aplicação
 
 - Frontend: [http://localhost:3000](http://localhost:3000)
-- Backend (API): [http://localhost:3001](http://localhost:3001)
+- Backend (API): [http://localhost:3003](http://localhost:3003)
 
 ### 4. Parar os contêineres
 
@@ -79,7 +79,7 @@ docker-compose -f docker-compose.prod.yml down
 **Frontend**
 ```env
 NEXT_PUBLIC_JWT_SECRET=chave-secreta-desenvolvimento
-NEXT_PUBLIC_API_URL=http://localhost:3001
+NEXT_PUBLIC_API_URL=http://localhost:3003
 ```
 
 **Backend**
@@ -106,6 +106,9 @@ DATABASE_PORT=3306
 DATABASE_USER=root
 DATABASE_PASSWORD=senha-prod
 DATABASE_NAME=prod_db
+FRONTEND_URL=https://localhost:3000
+JWT_SECRET=<sua-chave-secreta>
+JWT_EXPIRES_IN=1d
 ```
 
 ---
@@ -195,3 +198,7 @@ O **FlexCommerce** foi criado com foco em:
 - 🔐 **Segurança com variáveis de ambiente e HTTPS**
 
 Sinta-se à vontade para contribuir, reportar melhorias ou clonar para base de novos projetos!
+
+---
+
+# ⚠️Projeto em contrução e em constante evolução!⚠️

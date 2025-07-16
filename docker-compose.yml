@@ -17,7 +17,6 @@ services:
     command: npm run start:dev
     networks:
       - app-network
-      - shared-network
 
   frontend:
     build:
@@ -29,8 +28,6 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    environment:
-      - NODE_ENV=development
     env_file:
       - ./frontend/.env.development
     command: npm run dev
@@ -40,5 +37,3 @@ services:
 networks:
   app-network:
     driver: bridge
-  shared-network:
-    external: true
