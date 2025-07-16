@@ -1,0 +1,21 @@
+FROM node:18
+
+WORKDIR /app
+
+# Copia package.json e package-lock.json (ou yarn.lock)
+COPY package*.json ./
+
+# Instala todas as dependências (dev e prod)
+RUN npm install
+
+# Copia todo o código fonte para o container
+COPY . .
+
+# Define variável de ambiente NODE_ENV para desenvolvimento
+ENV NODE_ENV=development
+
+# Exponha a porta 3000
+EXPOSE 3000
+
+# Comando para iniciar o servidor em modo de desenvolvimento
+CMD ["npm", "run", "dev"]

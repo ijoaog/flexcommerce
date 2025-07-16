@@ -1,0 +1,89 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Verificar se há console.log no código
+        run: |
+          echo "🔍 Verificando por console.log no código TypeScript..."
+          MATCHES=$(grep -nIr --include="*.ts" --include="*.tsx" "console.log" ./src || true)
+          if [ -n "$MATCHES" ]; then
+            echo "❌ Encontrado console.log no código:"
+            echo "$MATCHES"
+            exit 1
+          else
+            echo "✅ Nenhum console.log encontrado."
+          fi
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Backend Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/flexcommerce-backend:latest
+
+      - name: Build and push Frontend Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/flexcommerce-frontend:latest
+          build-args: |
+            NEXT_PUBLIC_JWT_SECRET=${{ secrets.NEXT_PUBLIC_JWT_SECRET }}
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+
+      - name: Add SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Deploy to server via SSH
+        if: success()
+        run: |
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.SERVER_IP }} << 'EOF'
+            set -euxo pipefail
+
+            echo "✅ Conectado ao servidor"
+
+            cd /home/desenvolvimento/flexcommerce
+
+            echo "📦 Atualizando código fonte..."
+            git fetch --all || true
+            git reset --hard origin/production || true
+
+            echo "🔄 Garantindo rede Docker..."
+            docker network inspect web >/dev/null 2>&1 || docker network create web
+
+            echo "⬇️ Atualizando imagens..."
+            docker compose -f docker-compose.prod.yml pull || true
+
+            echo "🛑 Parando containers antigos..."
+            docker compose -f docker-compose.prod.yml down --remove-orphans
+
+            echo "🚀 Subindo containers..."
+            docker compose -f docker-compose.prod.yml up -d backend frontend
+
+            echo "✅ Deploy finalizado com sucesso!"
+          EOF

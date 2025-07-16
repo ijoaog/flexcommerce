@@ -1,0 +1,20 @@
+# Ignorar node_modules
+node_modules/
+
+# Ignorar arquivos de build
+dist/
+
+# Ignorar arquivos de configuração locais
+*.env.local
+*.env.development
+*.env.test
+*.env.production
+
+# Ignorar logs e arquivos temporários
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ignorar outros arquivos temporários
+.DS_Store
+*.swp

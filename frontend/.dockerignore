@@ -1,0 +1,33 @@
+# Ignora dependências locais já instaladas
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Configs de IDE/editor
+.vscode
+.idea
+*.swp
+
+# Pastas de build locais (caso build esteja fora do Docker)
+.next
+out
+
+# Testes e mocks (separar se não forem usados em prod)
+__tests__/
+__mocks__/
+coverage/
+
+# Arquivos específicos de dev (ajuste se necessário)
+.env.local
+.env.development
+*.test.ts
+*.test.tsx
+jest.config.*
+playwright.config.*
+vitest.config.*
