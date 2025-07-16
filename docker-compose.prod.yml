@@ -1,6 +1,6 @@
 services:
   backend:
-    image: ijoaog/flexcommerce-backend:latest
+    image: ijoaog/flexcommerce-backend:latest 
     container_name: flexcommerce-backend-1
     expose:
       - "3003"
