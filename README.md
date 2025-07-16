@@ -1,106 +1,89 @@
+# 🛍️ FlexCommerce — Sistema de Gestão Comercial
 
-# FLEXCOMMERCE 
-
-Este é um sistema de gestão comercial desenvolvido utilizando **Next.js** no frontend e **NestJS** no backend, com **MySQL** como banco de dados. A aplicação pode ser executada tanto no ambiente de **desenvolvimento** quanto de **produção**, usando **Docker** para facilitar a configuração e execução.
-
-## 🛠️ **Tecnologias utilizadas**
-
-- **Frontend**: Next.js (React)
-- **Backend**: NestJS (Node.js)
-- **Banco de dados**: MySQL
-- **Docker**: Utilizado para desenvolvimento e produção
+**FlexCommerce** é uma solução completa de gestão comercial desenvolvida com tecnologias modernas e escaláveis. Com **Next.js** no frontend, **NestJS** no backend e **MySQL** como banco de dados relacional, o projeto é totalmente containerizado com **Docker**, facilitando a execução em ambientes de **desenvolvimento** e **produção**.
 
 ---
 
-## 🚀 **Como rodar o aplicativo em desenvolvimento**
+## ⚙️ Tecnologias Utilizadas
 
-Para rodar o aplicativo em desenvolvimento, siga os passos abaixo:
+| Camada         | Tecnologia        |
+|----------------|-------------------|
+| Frontend       | [Next.js](https://nextjs.org/) (React) |
+| Backend        | [NestJS](https://nestjs.com/) (Node.js) |
+| Banco de Dados | [MySQL](https://www.mysql.com/) |
+| Contêineres    | [Docker](https://www.docker.com/) |
+| Servidor Web   | [NGINX](https://nginx.org/) com [Certbot](https://certbot.eff.org/) para SSL |
 
-### 1. **Clonando o repositório**
+---
+
+## 🚀 Ambiente de Desenvolvimento
+
+### 1. Clonar o repositório
 
 ```bash
 git clone https://github.com/ijoaog/flexcommerce.git
 cd flexcommerce
 ```
 
-### 2. **Rodando o ambiente de desenvolvimento com Docker**
-
-Este comando irá levantar tanto o frontend quanto o backend em contêineres Docker, junto com o MySQL como banco de dados.
+### 2. Iniciar com Docker
 
 ```bash
 docker-compose up --build
 ```
 
-### 3. **Acessando o aplicativo**
+Esse comando irá iniciar:
 
-- **Frontend**: Acesse a aplicação frontend na URL [http://localhost:3000](http://localhost:3000).
-- **Backend**: O backend estará disponível na URL [http://localhost:3001](http://localhost:3001) (para testes de API, por exemplo).
+- Frontend (Next.js) na porta `3000`
+- Backend (NestJS) na porta `3001`
+- MySQL na porta `3306`
 
-### 4. **Parando os contêineres**
+### 3. Acessar a aplicação
 
-Para parar os contêineres, basta rodar:
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Backend (API): [http://localhost:3001](http://localhost:3001)
+
+### 4. Parar os contêineres
 
 ```bash
 docker-compose down
 ```
 
-Isso irá parar e remover os contêineres em execução, mas **não excluirá** os dados do banco de dados.
+> Obs: Isso *não* remove os dados do banco. Use `-v` se quiser limpar tudo.
 
 ---
 
-## 🚀 **Como rodar o aplicativo em produção**
+## 📦 Ambiente de Produção
 
-Para rodar o aplicativo em produção, você deve usar a versão otimizada de produção do Docker, com a configuração específica para isso.
+Para rodar em produção com performance otimizada:
 
-### 1. **Rodando o ambiente de produção com Docker**
-
-Este comando irá subir o ambiente de produção, com a configuração correta para o backend e frontend otimizados.
+### 1. Subir o ambiente
 
 ```bash
 docker-compose -f docker-compose.prod.yml up --build
 ```
 
-### 2. **Acessando o aplicativo**
-
-- **Frontend**: O frontend estará acessível na URL [http://localhost:3000](http://localhost:3000), ou na URL configurada no ambiente de produção.
-- **Backend**: O backend estará acessível na URL [http://localhost:3001](http://localhost:3001) para fins de testes de API.
-
-### 3. **Parando os contêineres**
-
-Para parar os contêineres em produção:
+### 2. Parar o ambiente
 
 ```bash
 docker-compose -f docker-compose.prod.yml down
 ```
 
----
-
-## 📊 **Portas utilizadas**
-
-- **Frontend (Next.js)**: `3000` (pode ser acessado através de `http://localhost:3000` no desenvolvimento ou na URL configurada em produção).
-- **Backend (NestJS)**: `3001` (pode ser acessado através de `http://localhost:3001` para testar a API, ou na URL configurada em produção).
-- **Banco de dados (MySQL)**: `3306` (não acessível diretamente no ambiente de produção sem configuração específica).
+> 💡 Ideal para deploys automatizados via CI/CD.
 
 ---
 
-## 📝 **Configuração de variáveis de ambiente**
+## 🔐 Variáveis de Ambiente
 
-O projeto utiliza variáveis de ambiente para configurar o banco de dados e outras credenciais.
+### 🔧 `.env.development` (exemplo)
 
-Você pode configurar variáveis de ambiente no arquivo `.env` para os dois ambientes:
-
-### Exemplo de `.env.development` para desenvolvimento:
-
-## Frontend:
-
-```
-NEXT_PUBLIC_JWT_SECRET=<sua-chave-secreta-aqui>
-NEXT_PUBLIC_API_URL=https://flexcommerce.com.br
+**Frontend**
+```env
+NEXT_PUBLIC_JWT_SECRET=chave-secreta-desenvolvimento
+NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
-## Backend:
-
-```
+**Backend**
+```env
 DATABASE_HOST=mysql
 DATABASE_PORT=3306
 DATABASE_USER=root
@@ -108,63 +91,107 @@ DATABASE_PASSWORD=root
 DATABASE_NAME=app_db
 ```
 
+### 🚀 `.env.production` (exemplo)
 
-### Exemplo de `.env.production` para produção (alterar conforme necessário):
-
-## Frontend:
-
-```
-NEXT_PUBLIC_JWT_SECRET=<sua-chave-secreta-aqui>
-NEXT_PUBLIC_API_URL=http://localhost:3000
+**Frontend**
+```env
+NEXT_PUBLIC_JWT_SECRET=chave-secreta-producao
+NEXT_PUBLIC_API_URL=https://flexcommerce.com.br
 ```
 
-## Backend:
-
-
-```
-DATABASE_HOST=prod-db-host
+**Backend**
+```env
+DATABASE_HOST=db-prod-url
 DATABASE_PORT=3306
 DATABASE_USER=root
-DATABASE_PASSWORD=prod-password
+DATABASE_PASSWORD=senha-prod
 DATABASE_NAME=prod_db
 ```
 
 ---
 
-## 🚧 **CI/CD - Integração Contínua e Deploy**
+## 🗂️ Estrutura de Pastas
 
-Este projeto também pode ser configurado para pipelines de CI/CD no GitHub Actions, GitLab CI, etc. A estrutura já conta com um diretório `.github/` para colocar as definições de workflows de deploy.
-
----
-
-## 🔧 **Comandos úteis**
-
-### Para rodar o frontend e backend em containers Docker no desenvolvimento:
-
-```bash
-docker-compose up --build
 ```
-
-### Para rodar o ambiente de produção:
-
-```bash
-docker-compose -f docker-compose.prod.yml up --build
-```
-
-### Para parar os contêineres:
-
-```bash
-docker-compose down
-```
-
-### Para limpar volumes do banco de dados (em caso de reset completo):
-
-```bash
-docker-compose down -v
+flexcommerce/
+├── .github/workflows/deploy.yml  # CI/CD com GitHub Actions
+├── frontend/                     # Frontend (Next.js)
+├── backend/                      # Backend (NestJS)
+├── nginx/                        # Configuração do servidor NGINX
+├── docker-compose.yml
+├── docker-compose.prod.yml
+└── README.md
 ```
 
 ---
 
-## 📢 **Considerações finais**
+## 🌐 Deploy com NGINX + SSL (Certbot)
 
-Este projeto foi desenvolvido com o objetivo de ser facilmente escalável e configurável, tanto para o ambiente de desenvolvimento quanto para produção. Usamos **Docker** para simplificar a configuração e facilitar o gerenciamento de ambientes.
+O projeto inclui exemplos completos de deploy com NGINX e HTTPS via **Let's Encrypt**.
+
+📁 Exemplo: `nginx/conf.d/default.conf`
+
+Funcionalidades incluídas:
+
+- Redirecionamento de `www.` para sem `www.`
+- Redirecionamento de HTTP → HTTPS
+- Certificado SSL automático com Certbot
+- Reverse Proxy para frontend e backend
+
+### 🔄 Arquivo auxiliar para emissão de SSL (`no_ssl.conf`)
+
+```nginx
+server {
+    listen 80;
+    server_name example.com www.example.com;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+```
+
+> Após emissão do certificado, altere para o arquivo com SSL ativo.
+
+---
+
+## ⚙️ CI/CD com GitHub Actions
+
+O projeto possui integração contínua (CI) e deploy contínuo (CD) com GitHub Actions.
+
+### 🧪 O que a pipeline faz:
+
+1. Valida a ausência de `console.log` no código.
+2. Realiza build da aplicação com Docker.
+3. Realiza deploy automático para produção ao fazer *merge* na branch `production`.
+
+> ✅ **Automatize com segurança. Sem cliques extras.**
+
+---
+
+## 🧰 Comandos Úteis
+
+| Comando | Descrição |
+|--------|-----------|
+| `docker-compose up --build` | Sobe os serviços de desenvolvimento |
+| `docker-compose down` | Para os contêineres |
+| `docker-compose down -v` | Remove os contêineres **e os volumes** (⚠️ reset total) |
+| `docker-compose -f docker-compose.prod.yml up --build` | Sobe o ambiente de produção |
+| `docker-compose -f docker-compose.prod.yml down` | Para o ambiente de produção |
+
+---
+
+## 📢 Considerações Finais
+
+O **FlexCommerce** foi criado com foco em:
+
+- 🔁 **Modularidade e Escalabilidade**
+- 🐳 **Ambientes isolados com Docker**
+- 🧪 **Testabilidade com pipelines CI/CD**
+- 🔐 **Segurança com variáveis de ambiente e HTTPS**
+
+Sinta-se à vontade para contribuir, reportar melhorias ou clonar para base de novos projetos!
