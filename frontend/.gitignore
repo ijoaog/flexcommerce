@@ -8,6 +8,9 @@
 !.yarn/releases
 !.yarn/versions
 
+.env.development
+.env.production
+
 # testing
 /coverage
 
@@ -30,7 +33,6 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
 .env.local
 .env.*.local
 

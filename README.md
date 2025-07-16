@@ -89,9 +89,18 @@ O projeto utiliza variáveis de ambiente para configurar o banco de dados e outr
 
 Você pode configurar variáveis de ambiente no arquivo `.env` para os dois ambientes:
 
-### Exemplo de `.env` para desenvolvimento:
+### Exemplo de `.env.development` para desenvolvimento:
 
-```env
+## Frontend:
+
+```
+NEXT_PUBLIC_JWT_SECRET=<sua-chave-secreta-aqui>
+NEXT_PUBLIC_API_URL=https://flexcommerce.com.br
+```
+
+## Backend:
+
+```
 DATABASE_HOST=mysql
 DATABASE_PORT=3306
 DATABASE_USER=root
@@ -99,9 +108,20 @@ DATABASE_PASSWORD=root
 DATABASE_NAME=app_db
 ```
 
-### Exemplo de `.env` para produção (alterar conforme necessário):
 
-```env
+### Exemplo de `.env.production` para produção (alterar conforme necessário):
+
+## Frontend:
+
+```
+NEXT_PUBLIC_JWT_SECRET=<sua-chave-secreta-aqui>
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+## Backend:
+
+
+```
 DATABASE_HOST=prod-db-host
 DATABASE_PORT=3306
 DATABASE_USER=root
