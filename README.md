@@ -1,4 +1,4 @@
-# 🛍️ FlexCommerce — Sistema de Gestão Comercial
+# FlexCommerce — Sistema de Gestão Comercial
 
 **FlexCommerce** é uma solução completa de gestão comercial desenvolvida com tecnologias modernas e escaláveis. Com **Next.js** no frontend, **NestJS** no backend e **MySQL** como banco de dados relacional, o projeto é totalmente containerizado com **Docker**, facilitando a execução em ambientes de **desenvolvimento** e **produção**.
 
@@ -16,7 +16,7 @@
 
 ---
 
-## 🚀 Ambiente de Desenvolvimento
+## Ambiente de Desenvolvimento
 
 ### 1. Clonar o repositório
 
@@ -49,26 +49,6 @@ docker-compose down
 ```
 
 > Obs: Isso *não* remove os dados do banco. Use `-v` se quiser limpar tudo.
-
----
-
-## 📦 Ambiente de Produção
-
-Para rodar em produção com performance otimizada:
-
-### 1. Subir o ambiente
-
-```bash
-docker-compose -f docker-compose.prod.yml up --build
-```
-
-### 2. Parar o ambiente
-
-```bash
-docker-compose -f docker-compose.prod.yml down
-```
-
-> 💡 Ideal para deploys automatizados via CI/CD.
 
 ---
 
@@ -132,7 +112,7 @@ flexcommerce/
 
 O projeto inclui exemplos completos de deploy com NGINX e HTTPS via **Let's Encrypt**.
 
-📁 Exemplo: `nginx/conf.d/default.conf`
+Exemplo: `nginx/conf.d/default.conf`
 
 Funcionalidades incluídas:
 
@@ -172,11 +152,10 @@ O projeto possui integração contínua (CI) e deploy contínuo (CD) com GitHub 
 2. Realiza build da aplicação com Docker.
 3. Realiza deploy automático para produção ao fazer *merge* na branch `production`.
 
-> ✅ **Automatize com segurança. Sem cliques extras.**
 
 ---
 
-## 🧰 Comandos Úteis
+##Comandos Úteis
 
 | Comando | Descrição |
 |--------|-----------|
@@ -199,6 +178,8 @@ O **FlexCommerce** foi criado com foco em:
 
 Sinta-se à vontade para contribuir, reportar melhorias ou clonar para base de novos projetos!
 
+TODO: Adicionar migration quando ao banco de dados, componentização no front, etc (até porque a evolução é constante!)
+
 ---
 
-# ⚠️Projeto em contrução e em constante evolução!⚠️
+# ⚠️Projeto em construção e em constante evolução!⚠️
