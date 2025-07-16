@@ -52,26 +52,6 @@ docker-compose down
 
 ---
 
-## 📦 Ambiente de Produção
-
-Para rodar em produção com performance otimizada:
-
-### 1. Subir o ambiente
-
-```bash
-docker-compose -f docker-compose.prod.yml up --build
-```
-
-### 2. Parar o ambiente
-
-```bash
-docker-compose -f docker-compose.prod.yml down
-```
-
-> 💡 Ideal para deploys automatizados via CI/CD.
-
----
-
 ## 🔐 Variáveis de Ambiente
 
 ### 🔧 `.env.development` (exemplo)
@@ -161,7 +141,7 @@ server {
 
 ## ⚙️ CI/CD com GitHub Actions
 
-O projeto possui integração contínua (CI) e deploy contínuo (CD) com GitHub Actions.
+O projeto possui integração contínua (CI) e deploy contínuo (CD) com GitHub Actions, basta fazer o pull request e aceitar este na branch production.
 
 ### 🧪 O que a pipeline faz:
 
