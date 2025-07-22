@@ -110,6 +110,8 @@ flexcommerce/
 └── README.md
 ```
 
+> Uma outra alternativa seria criar apenas um .env na raiz do projeto.
+
 ---
 
 ## 🌐 Deploy com NGINX + SSL (Certbot)
