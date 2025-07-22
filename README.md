@@ -99,7 +99,11 @@ JWT_EXPIRES_IN=1d
 flexcommerce/
 ├── .github/workflows/deploy.yml  # CI/CD com GitHub Actions
 ├── frontend/                     # Frontend (Next.js)
+├──── .env.development
+├──── .env.production
 ├── backend/                      # Backend (NestJS)
+├──── .env.development
+├──── .env.production
 ├── nginx/                        # Configuração do servidor NGINX
 ├── docker-compose.yml
 ├── docker-compose.prod.yml
