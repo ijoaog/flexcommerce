@@ -8,8 +8,8 @@ import { existsSync } from 'fs';
 import { Logger } from 'nestjs-pino';
 
 // Carrega .env.local se não for produção
-if (process.env.NODE_ENV !== 'production' && existsSync('.env.dev')) {
-  dotenv.config({ path: '.env.dev' });
+if (process.env.NODE_ENV !== 'production' && existsSync('.env.development')) {
+  dotenv.config({ path: '.env.development' });
 } else {
   dotenv.config({ path: '.env.production' }); // padrão: .env
 }
